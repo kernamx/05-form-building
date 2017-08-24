@@ -11,8 +11,23 @@
     <link rel="stylesheet" href="styles/modules.css">
     <!-- NOTE (stretch goal): To fully incorporate the highlighting library "hljs" we need to fill the empty link tag below to refer to a CSS file that will handle our text highlighting -->
     <link>
-    <!-- TODO: We want our new article form to be able to display a preview of the article that is being entered. Thus, we need code here that will recreate the same structure of our other articles. What do you think we need to add here? -->
+    <!-- done: We want our new article form to be able to display a preview of the article that is being entered.
+    Thus, we need code here that will recreate the same structure of our other articles. What do you think we need to add here? -->
+    <script id="article-template" type="text/x-handlebars-template">
+      <article class="clearfix" data-author="{{author}}" data-category="{{category}}">
+        <header>
+          <h1>{{title}}</h1>
+          <div class="byline">
+            By <address><a href="{{authorUrl}}">{{author}}</a></address>
+            {{publishStatus}}
+          </div>
+        </header>
+        <section class="article-body">{{{body}}}</section>
+        <a href="#" class="read-on">Read on &rarr;</a>
+      </article>
+    </script>
     </head>
+
   <body>
     <header class="site-header clearfix">
       <section class="heading-group-h1 pull-left">
@@ -34,13 +49,24 @@
 
       <section id="write" class="tab-content">
         <h1>Create New Article</h1>
-        <!-- TODO: Set up a form to accept user input for a new blog article. Remember that we need:
+        <!-- done: Set up a form to accept user input for a new blog article. Remember that we need:
                    1. Article title
                    2. Article body
                    3. Article author
                    4. Author's URL
                    5. Article category
                    6. Some way to know if this article is a draft or is published -->
+        <form id="new_article">
+          <fieldset>
+            <legend>New Article</legend>
+            <input id="title" name="title" placeholder="Article Title" type="text"></input>
+            <textarea id="body" name="body" placeholder="Type stuff here..." rows="10" cols="70"></textarea>
+            <input id="author" name="author" placeholder="Author" type="text"></input>
+            <input id="authorUrl" name="authorUrl" placeholder="Author URL" type="text"></input>
+            <input id="category" name="category" placeholder="Category" type="text"></input>
+            <input id="pub_box" name="pub_box" type="checkbox"></input>
+            <label for="pub_box">Published</label>
+          </fieldset>
       </section>
 
       <section id="articles" class="tab-content">
@@ -48,7 +74,8 @@
       </section>
 
       <section id="article-export">
-        <!-- TODO: Refer to the preview image to see what we will be building here: we need a container of some kind to hold a JSON export of our article. Ideally this container would show only a incipit (short preview) of the JSON and also be clickable to allow easy selection of the text it holds. What kind of element could we use for this? -->
+        <!-- done: Refer to the preview image to see what we will be building here: we need a container of some kind to hold a JSON export of our article. Ideally this container would show only a incipit (short preview) of the JSON and also be clickable to allow easy selection of the text it holds. What kind of element could we use for this? -->
+        <input id="export" type="text" readonly></input>
       </section>
 
     </main>
@@ -63,9 +90,10 @@
     <script src="/scripts/article.js"></script>
     <script src="/scripts/articleView.js"></script>
     <script>
-      // TODO: We will need to call a function here to initialize the behaviors on this page, once we get them built out. Why?
+      // done: We will need to call a function here to initialize the behaviors on this page, once we get them built out. Why?
       // (Look at the bottom of index.html as a reference. Since we are now using our JS on two different HTML pages that have different needs as to what parts of the code they utilize, we need to build a function that inializes each page.)
       //  Hint: Look in articleView.js for a function that does this.
+      articleView.initNewArticlePage();
     </script>
   </body>
 </html>
